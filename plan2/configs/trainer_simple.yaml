@@ -1,0 +1,14 @@
+trainer:
+  device: "cuda"
+  num_workers: 8
+  amp: false  # Disable AMP for debugging
+  grad_accum_steps: 1
+  log_interval: 100
+  eval_interval_steps: 4000
+  save_top_k: 1
+  monitor: "composite"
+  maximize: true
+  loss:
+    type: "bce"
+    pos_weight: 10.0  # Fixed reasonable value
+    focal_gamma: 2.0

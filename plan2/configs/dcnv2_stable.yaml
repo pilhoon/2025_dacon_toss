@@ -1,0 +1,24 @@
+data:
+  train_path: "data/train.parquet"
+  test_path: "data/test.parquet"
+  target: "clicked"
+  cat_patterns: ["gender", "age_group", "inventory_id", "l_feat_*", "feat_*"]
+  num_patterns: ["day_of_week", "hour", "history_*"]
+  min_freq: 10
+  max_seq_len: 50
+model:
+  type: dcnv2
+  embed_dim: 16  # Smaller embedding
+  cross_depth: 2  # Simpler cross network
+  mlp_dims: [128, 64]  # Smaller MLP
+  dropout: 0.2  # More dropout
+train:
+  batch_size: 8192  # Smaller batch for stability
+  epochs: 3
+  lr: 0.0001  # Lower learning rate
+  weight_decay: 0.01
+  early_stop_patience: 3
+  mixed_precision: false  # Disable mixed precision initially
+  folds: 3
+  seed: 42
+  grad_clip: 1.0  # Add gradient clipping

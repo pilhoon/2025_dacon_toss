@@ -1,0 +1,15 @@
+CLAUDE.md
+*.csv
+.venv
+__pycache__
+.git
+cache
+*.pth
+.claude
+uv.lock
+pyproject.toml
+.gitignore
+*.pkl
+*.pt
+.gitkeep
+exclude.txt

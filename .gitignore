@@ -1,0 +1,34 @@
+# Python 가상환경
+.venv/
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+
+# 데이터 파일
+*.csv
+*.parquet
+
+# 모델 파일
+*.pkl
+*.pth
+*.h5
+*.ckpt
+*.bin
+*.model
+*.json
+
+# 로그 파일
+*.log
+
+# 대용량 텍스트 파일 (모델 출력 등)
+plan*/experiments/*/final_model.txt
+plan2/045_lightgbm_dart_model.txt
+plan2/051_new_features.txt
+plan4/008_calibration_report.txt
+
+# UV lock 파일 (일반적으로는 추적하지만 원하면 제외 가능)
+# uv.lock
+
+# macOS
+.DS_Store

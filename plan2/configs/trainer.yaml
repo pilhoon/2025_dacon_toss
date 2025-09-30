@@ -1,0 +1,16 @@
+trainer:
+  device: "cuda"
+  num_workers: 16
+  amp: bf16
+  grad_accum_steps: 1
+  log_interval: 100
+  eval_interval_steps: 4000
+  save_top_k: 1
+  monitor: "composite"  # 0.5*AP + 0.5*(1/(1+WLL))
+  maximize: true
+  loss:
+    type: "bce"        # bce | focal
+    pos_weight: "auto"  # auto -> N_neg/N_pos; or float value
+    focal_gamma: 2.0
+
+

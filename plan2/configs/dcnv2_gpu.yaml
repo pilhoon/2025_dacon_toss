@@ -1,0 +1,23 @@
+data:
+  train_path: "../../data/train.parquet"
+  test_path: "../../data/test.parquet"
+  target: "clicked"
+  cat_patterns: ["gender", "age_group", "inventory_id", "l_feat_*", "h_feat_*"]
+  num_patterns: ["day_of_week", "hour", "history_*", "e_feat_*", "r_feat_*"]
+  min_freq: 10
+  max_seq_len: 50
+model:
+  type: dcnv2
+  embed_dim: 64  # Larger embeddings
+  cross_depth: 5  # More cross layers
+  mlp_dims: [512, 256, 128, 64]  # Larger network
+  dropout: 0.1
+train:
+  batch_size: 250000  # Large batch for GPU
+  epochs: 10
+  lr: 0.002  # Higher LR for large batch
+  weight_decay: 0.001
+  early_stop_patience: 3
+  mixed_precision: bf16
+  folds: 1
+  seed: 42

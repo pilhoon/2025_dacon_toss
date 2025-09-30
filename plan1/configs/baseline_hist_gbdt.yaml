@@ -1,0 +1,44 @@
+data:
+  train_path: "../../data/train.parquet"
+  test_path: "../../data/test.parquet"
+  target: "clicked"
+  id_column: "ID"
+  # 필요한 컬럼만 로딩하고 싶다면 패턴으로 지정
+  use_patterns:
+    - "gender"
+    - "age_group"
+    - "inventory_id"
+    - "day_of_week"
+    - "hour"
+    - "seq"
+    - "l_feat_*"
+    - "feat_*"
+    - "history_*"
+  exclude_patterns: []
+  n_rows: 100000  # 디버그용 소량 샘플링(예: 100000)
+
+cv:
+  method: "StratifiedKFold"
+  n_splits: 5
+  shuffle: true
+  random_state: 42
+
+model:
+  type: "sklearn_hist_gbdt"
+  params:
+    max_depth: null
+    learning_rate: 0.1
+    max_iter: 200
+    l2_regularization: 0.0
+    early_stopping: true
+    validation_fraction: 0.1
+    n_iter_no_change: 20
+
+train:
+  eval_metric: "roc_auc"  # 보조로 logloss, pr_auc도 기록
+  n_jobs: -1
+
+output:
+  dir: "plan1/experiments/baseline_hist"
+
+

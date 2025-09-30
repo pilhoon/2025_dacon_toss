@@ -1,0 +1,26 @@
+data:
+  train_path: "data/train.parquet"
+  test_path: "data/test.parquet"
+  target: "clicked"
+  target_item_col: "l_feat_14"
+  behavior_prefix: "history_"
+  max_seq_len: 50
+  cat_patterns: ["gender", "age_group", "inventory_id", "l_feat_*", "feat_*"]
+  num_patterns: ["day_of_week", "hour"]
+  min_freq: 10
+model:
+  type: din
+  embed_dim: 32
+  mlp_dims: [256, 128, 64]
+  attn_hidden: 64
+  dropout: 0.1
+train:
+  batch_size: 131072
+  epochs: 8
+  lr: 0.0008
+  weight_decay: 0.02
+  mixed_precision: bf16
+  folds: 5
+  seed: 42
+
+

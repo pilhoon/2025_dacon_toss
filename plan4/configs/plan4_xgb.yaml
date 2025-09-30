@@ -1,0 +1,48 @@
+# plan4/configs/plan4_xgb.yaml
+seed: 42
+exp_name: plan4_xgb
+
+# 데이터
+train_path: "data/train.parquet"
+test_path: "data/test.parquet"
+id_column: "ID"
+target: "clicked"
+
+# 빠른 디버깅용 (전체 학습은 null)
+n_rows: null           # 예: 100000 으로 두면 10만 행만 읽음
+use_columns: null      # 예: ["gender","age_group","inventory_id","day_of_week","hour"] 등 부분 컬럼만 사용
+
+# CV
+n_splits: 5
+early_stopping_rounds: 50
+num_boost_round: 1500
+
+# 전처리
+categorical_encoding: "ordinal"  # [ordinal] 고카디널리티 대응
+fillna_numeric: 0
+
+# 클래스 불균형
+use_scale_pos_weight: true
+
+# XGBoost 파라미터(점수 최적화 지향 기본값)
+xgb_params:
+  objective: "binary:logistic"
+  eval_metric: "auc"        # 내부 검증은 AUC도 확인
+  tree_method: "hist"
+  learning_rate: 0.05
+  max_depth: 10
+  min_child_weight: 5
+  subsample: 0.8
+  colsample_bytree: 0.8
+  reg_alpha: 0.01
+  reg_lambda: 1.0
+  gamma: 0.0
+  nthread: -1
+
+# 캘리브레이션 (WLL 개선용)
+calibration:
+  method: "isotonic"     # ["isotonic","platt","none"]
+  apply_on_test: true     # test에도 적용
+
+# 제출
+submission_name: "plan4_submission.csv"
